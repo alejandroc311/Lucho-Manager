@@ -1,5 +1,6 @@
 package sample;
 
+import Model.DBConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main extends Application {
+    private static DBConnector dbConnector = new DBConnector();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,15 +25,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        String url = "jdbc:mysql://localhost:3306/javabase?&useSSL=false";
-        String username = "java";
-        String password = "Gohanssj2";
-        System.out.println("Connecting database...");
 
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Database connected!");
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
-        }
+        System.out.println("Connecting database...");
+        dbConnector.connectToDB();
     }
+
 }

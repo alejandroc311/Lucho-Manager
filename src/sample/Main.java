@@ -27,7 +27,7 @@ public class Main extends Application {
         launch(args);
 
         System.out.println("Connecting database...");
-        dbConnector.connectToDB();
+        dbConnector.getConnection();
     }
 
 }

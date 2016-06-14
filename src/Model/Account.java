@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -11,8 +13,15 @@ public class Account {
     private int mAccountNumber;
     private double mMoneyInvested;
     private double mMoneyWonOrLost;
-    private Date mDateCreated;
+    private Date mDateCreated = new Date();
     private Date mDateClosed;
+    private Calendar mCalendar = Calendar.getInstance();
+    private java.sql.Date mDateCreatedSQL = new java.sql.Date(mCalendar.getTime().getTime());
+    private SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+
+    public java.sql.Date getDateCreatedSQL(){
+        return mDateCreatedSQL  ;
+    }
 
     public String getAccountOwner() {
         return mAccountOwner;
@@ -50,9 +59,12 @@ public class Account {
         return mDateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        mDateCreated = dateCreated;
+    public String getDateCreationString() {
+
+        return sdf.format(getDateCreated());
     }
+
+
 
     public Date getDateClosed() {
         return mDateClosed;
@@ -60,5 +72,9 @@ public class Account {
 
     public void setDateClosed(Date dateClosed) {
         mDateClosed = dateClosed;
+    }
+
+    public String getDateClosedString(){
+        return sdf.format(getDateClosed());
     }
 }

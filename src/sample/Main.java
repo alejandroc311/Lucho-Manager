@@ -1,5 +1,6 @@
 package sample;
 
+import Model.Account;
 import Model.DBConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,11 +24,14 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         launch(args);
-
+        Account account = new Account();
         System.out.println("Connecting database...");
-        dbConnector.getConnection();
+
+        account.setAccountOwner("Alejandro"); account.setMoneyInvested(771.00); account.setMoneyWonOrLost(75.00);
+        account.setAccountNumber(1000);
+        dbConnector.insertDataToDB(account);
     }
 
 }

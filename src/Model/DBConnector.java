@@ -16,23 +16,36 @@ public class DBConnector {
     private String url = "jdbc:mysql://localhost:3306/javabase?&useSSL=false";
     private String username = "java";
     private String password = "Gohanssj2";
+    private Connection mConnection = null;
     public DBConnector(){}
 
-    public Connection getConnection(){
-        try ( Connection connection = DriverManager.getConnection(url,username,password)){
-            System.out.println("Connected successfully");
-            return connection;
-        }catch(SQLException e){
-            throw new IllegalStateException("Cannot connect", e);
+    public void setConnection(){
+        try{
+            mConnection = DriverManager.getConnection(url,username,password);
+            System.out.println("Connection was created.");
+        }
+        catch(SQLException e){
+            throw new IllegalStateException("cannot connect",e);
         }
     }
 
-    public void insertDataToDB(Account account) throws SQLException {
+    public Connection getConnection(){
+        if(mConnection==null){
+            setConnection();
+        }
+        return mConnection;
+    }
+
+
+
+    public void insertDataToAccountTable(Account account) throws SQLException {
         String accountQuery = "INSERT INTO account (accountOwner, moneyInvested, moneyWonOrLost,accountNumber,dateCreated, dateClosed)" +
                 "VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = getConnection().prepareStatement(accountQuery);
         preparedStatement.setString(1,account.getAccountOwner()); preparedStatement.setDouble(2,account.getMoneyInvested());
-        preparedStatement.setDouble(3,account.getMoneyWonOrLost()); preparedStatement.setDate(4,account.getDateCreatedSQL());
-        preparedStatement.setDate(5,null);
+        preparedStatement.setDouble(3,account.getMoneyWonOrLost()); preparedStatement.setInt(4,account.getAccountNumber());
+        preparedStatement.setDate(5,account.getDateCreatedSQL());preparedStatement.setDate(6,null);
+        preparedStatement.execute();
+        getConnection().close();
     }
 }

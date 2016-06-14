@@ -13,14 +13,14 @@ public class Account {
     private int mAccountNumber;
     private double mMoneyInvested;
     private double mMoneyWonOrLost;
-    private Date mDateCreated;
+    private Date mDateCreated = new Date();
     private Date mDateClosed;
     private Calendar mCalendar = Calendar.getInstance();
     private java.sql.Date mDateCreatedSQL = new java.sql.Date(mCalendar.getTime().getTime());
     private SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 
     public java.sql.Date getDateCreatedSQL(){
-        return mDateCreatedSQL;
+        return mDateCreatedSQL  ;
     }
 
     public String getAccountOwner() {
@@ -64,9 +64,7 @@ public class Account {
         return sdf.format(getDateCreated());
     }
 
-    public void setDateCreated(Date dateCreated) {
-        mDateCreated = dateCreated;
-    }
+
 
     public Date getDateClosed() {
         return mDateClosed;

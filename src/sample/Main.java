@@ -1,15 +1,13 @@
 package sample;
 
 import Model.Account;
-import Model.DBConnector;
+import Model.ConnectionUtilities.DBConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -31,7 +29,7 @@ public class Main extends Application {
 
         account.setAccountOwner("Alejandro"); account.setMoneyInvested(771.00); account.setMoneyWonOrLost(75.00);
         account.setAccountNumber(1000);
-        dbConnector.insertDataToDB(account);
+        dbConnector.insertDataToAccountTable(account);
     }
 
 }

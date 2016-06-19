@@ -17,10 +17,8 @@ public class DBConnector {
     private String url = "jdbc:mysql://localhost:3306/javabase?&useSSL=false";
     private String username = "java";
     private String password = "Gohanssj2";
-    private javax.sql.ConnectionPoolDataSource mConnectionPoolDataSource;
-    private DataSource mDataSource;
-    private InitialContext mInitialContext;
     private Connection mConnection = null;
+    private ConnectionPool mConnectionPool;
     public DBConnector(){}
 
 

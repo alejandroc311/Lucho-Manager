@@ -9,6 +9,25 @@ import java.util.Date;
  */
 public class Account {
     public Account(){}
+
+    public boolean isDidAdministratorConfirm() {
+        return didAdministratorConfirm;
+    }
+
+    public void setDidAdministratorConfirm(boolean didAdministratorConfirm) {
+        this.didAdministratorConfirm = didAdministratorConfirm;
+    }
+
+    public boolean isDidOwnerConfirm() {
+        return didOwnerConfirm;
+    }
+
+    public void setDidOwnerConfirm(boolean didOwnerConfirm) {
+        this.didOwnerConfirm = didOwnerConfirm;
+    }
+
+    private boolean didOwnerConfirm = false;
+    private boolean didAdministratorConfirm = false;
     private String mAccountOwner;
     private int mAccountNumber;
     private double mMoneyInvested;

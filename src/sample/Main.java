@@ -27,9 +27,16 @@ public class Main extends Application {
         Account account = new Account();
         System.out.println("Connecting database...");
 
-        account.setAccountOwner("Alejandro"); account.setMoneyInvested(771.00); account.setMoneyWonOrLost(75.00);
-        account.setAccountNumber(1000);
+        account.setAccountOwner("Lucho"); account.setMoneyInvested(0.00); account.setMoneyWonOrLost(0.00);
+        account.setAccountNumber(1002);
+        System.out.println("Account created.");
         dbConnector.insertDataToAccountTable(account);
+        System.out.println("Accont sent to database.");
+        account.setMoneyInvested(791.00); account.setMoneyWonOrLost(75.00);
+        System.out.println("Account edited.");
+        dbConnector.editDataInAccountTable(account);
+        System.out.println("Edited account sent to database.");
+
     }
 
 }

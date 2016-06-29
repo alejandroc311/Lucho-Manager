@@ -28,7 +28,7 @@ public class Main extends Application {
         System.out.println("Connecting database...");
 
         account.setAccountOwner("Lucho"); account.setMoneyInvested(0.00); account.setMoneyWonOrLost(0.00);
-        account.setAccountNumber(1002);
+        account.setAccountNumber(1000);
         System.out.println("Account created.");
         dbConnector.insertDataToAccountTable(account);
         System.out.println("Accont sent to database.");
@@ -36,7 +36,9 @@ public class Main extends Application {
         System.out.println("Account edited.");
         dbConnector.editDataInAccountTable(account);
         System.out.println("Edited account sent to database.");
-
+        dbConnector.selectDataInAccountTable(account);
+        dbConnector.removeDataInAccountTable(account);
+        System.out.println("Deleted data from database.");
     }
 
 }

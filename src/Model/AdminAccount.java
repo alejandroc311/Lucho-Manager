@@ -1,39 +1,21 @@
 package Model;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 
 /**
  * Created by Alejandro on 7/2/2016.
  */
-//this class is the model for the account logbook that relates an administrator to a list of accounts
+//this class is the model for the admin account that will have a
+    //1-)private folder
+    //2-) a username and password
+
 public class AdminAccount {
-    public AdminAccount(){}
-    private String mAdminUsername;
+    private String mUsername;
+    private String mPassword;
+    private Path adminAccountRootFolder;
+    public AdminAccount(){
 
-    public String getAdminUsername() {
-        return mAdminUsername;
     }
 
-    public void setAdminUsername(String adminUsername) {
-        mAdminUsername = adminUsername;
-    }
-
-    public String getAdminPassword() {
-        return mAdminPassword;
-    }
-
-    public void setAdminPassword(String adminPassword) {
-        mAdminPassword = adminPassword;
-    }
-
-    public HashMap<Integer, Account> getAdminAccounts() {
-        return mAdminAccounts;
-    }
-
-    public void setAdminAccounts(HashMap<Integer, Account> adminAccounts) {
-        mAdminAccounts = adminAccounts;
-    }
-
-    private String mAdminPassword;
-    private HashMap<Integer,Account> mAdminAccounts;
 }

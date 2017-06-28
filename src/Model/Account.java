@@ -1,31 +1,22 @@
 package Model;
 
+import Model.FileUtilities.DirManager;
+
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Alejandro on 6/9/2016.
  */
 public class Account {
-    public Account(){}
-
-    public boolean isDidAdministratorConfirm() {
-        return didAdministratorConfirm;
+    public Account(){
     }
-
-    public void setDidAdministratorConfirm(boolean didAdministratorConfirm) {
-        this.didAdministratorConfirm = didAdministratorConfirm;
-    }
-
-    public boolean isDidOwnerConfirm() {
-        return didOwnerConfirm;
-    }
-
-    public void setDidOwnerConfirm(boolean didOwnerConfirm) {
-        this.didOwnerConfirm = didOwnerConfirm;
-    }
-
+    //shitton of cache
+    Random rng = new Random();
+    private Path mAccountDirectory = null;
     private boolean didOwnerConfirm = false;
     private boolean didAdministratorConfirm = false;
     private String mAccountOwner;
@@ -37,7 +28,47 @@ public class Account {
     private Calendar mCalendar = Calendar.getInstance();
     private java.sql.Date mDateCreatedSQL = new java.sql.Date(mCalendar.getTime().getTime());
     private SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+    private String mAccountCode = null;
 
+    //method for setting up random unique code for each account
+    public void setAccountCode(){
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String accountCode = "";
+        for(int i = 0;i<6;i++){
+            accountCode+= alphabet.charAt(rng.nextInt(alphabet.length()));
+        }
+        mAccountCode = accountCode;
+    }
+    public String getAccountCode(){
+        if(mAccountCode==null){
+            setAccountCode();
+        }
+        return mAccountCode;
+    }
+    public void setAccountDirectory(Path accountDirectoryPath){
+        mAccountDirectory = accountDirectoryPath;
+    }
+    public Path getAccountDirectory(){
+        return mAccountDirectory;
+    }
+    private String mAccountAdmin;
+    public String getAccountAdmin() {return mAccountAdmin;}
+
+    public void setAccountAdmin(String accountAdmin) {mAccountAdmin = accountAdmin;}
+
+    public boolean isDidAdministratorConfirm() {
+        return didAdministratorConfirm;
+    }
+
+    public void setDidAdministratorConfirm(boolean didAdministratorConfirm) {this.didAdministratorConfirm = didAdministratorConfirm;}
+
+    public boolean isDidOwnerConfirm() {
+        return didOwnerConfirm;
+    }
+
+    public void setDidOwnerConfirm(boolean didOwnerConfirm) {
+        this.didOwnerConfirm = didOwnerConfirm;
+    }
     public java.sql.Date getDateCreatedSQL(){
         return mDateCreatedSQL  ;
     }

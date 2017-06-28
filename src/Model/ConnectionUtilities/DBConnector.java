@@ -40,40 +40,41 @@ public class DBConnector {
 
     // method for inserting data of account information into database
     public void insertDataToAccountTable(Account account) throws SQLException {
-        String insertStatement = "INSERT INTO account (accountOwner, moneyInvested, moneyWonOrLost,accountNumber,dateCreated, dateClosed)" +
+        String insertStatement = "INSERT INTO account (accountOwner, moneyInvested, moneyWonOrLost,accountCode,dateCreated, dateClosed)" +
                 "VALUES (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = getConnection().prepareStatement(insertStatement);
         preparedStatement.setString(1,account.getAccountOwner()); preparedStatement.setDouble(2,account.getMoneyInvested());
-        preparedStatement.setDouble(3,account.getMoneyWonOrLost()); preparedStatement.setInt(4,account.getAccountNumber());
+        preparedStatement.setDouble(3,account.getMoneyWonOrLost()); preparedStatement.setString(4,account.getAccountCode());
         preparedStatement.setDate(5,account.getDateCreatedSQL());preparedStatement.setDate(6,null);
         preparedStatement.execute();
         getConnection().close();
     }
     //method for editing and updating information in database
     public void editDataInAccountTable(Account account) throws SQLException{
-        String editStatement = "UPDATE account SET moneyInvested = ? WHERE accountNumber = ?";
+        String editStatement = "UPDATE account SET moneyInvested = ? WHERE accountCode = ?";
         PreparedStatement preparedStatement = getConnection().prepareStatement(editStatement);
-        preparedStatement.setDouble(1,account.getMoneyInvested()); preparedStatement.setInt(2,account.getAccountNumber());
+        preparedStatement.setDouble(1,account.getMoneyInvested()); preparedStatement.setString(2,account.getAccountCode());
         preparedStatement.executeUpdate();
         getConnection().close();
+
 
     }
     //method for deleting accounts from the database
     public void removeDataInAccountTable(Account account)throws SQLException{
-        String deleteStatement = "DELETE FROM account WHERE accountNumber = ?";
+        String deleteStatement = "DELETE FROM account WHERE accountOwner = ?";
         PreparedStatement preparedStatement = getConnection().prepareStatement(deleteStatement);
-        preparedStatement.setInt(1,account.getAccountNumber());
+        preparedStatement.setString(1,account.getAccountOwner());
         preparedStatement.execute();
         getConnection().close();
     }
 
     public void selectDataInAccountTable(Account account)throws SQLException{
-        String selectStatement = "SELECT accountNumber,accountOwner FROM account WHERE accountNumber = ?";
+        String selectStatement = "SELECT accountCode,accountOwner FROM account WHERE accountCode = ?";
         PreparedStatement preparedStatement = getConnection().prepareStatement(selectStatement);
-        preparedStatement.setInt(1,account.getAccountNumber());
+        preparedStatement.setString(1,account.getAccountCode());
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
-            System.out.println("Deleted account #:" +resultSet.getInt("accountNumber")+
+            System.out.println("Deleted account #:" +resultSet.getString("accountCode")+
                     "\nOwner:"+resultSet.getString("accountOwner"));
         }
         getConnection().close();
